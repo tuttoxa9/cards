@@ -314,10 +314,10 @@ const Prism: React.FC<PrismProps> = ({
       roll = 0;
     let targetYaw = 0,
       targetPitch = 0;
-    const lerp = (a, b, t) => a + (b - a) * t;
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
     const pointer = { x: 0, y: 0, inside: true };
-    const onMove = e => {
+    const onMove = (e: MouseEvent) => {
       const ww = Math.max(1, window.innerWidth);
       const wh = Math.max(1, window.innerHeight);
       const cx = ww * 0.5;
@@ -337,7 +337,7 @@ const Prism: React.FC<PrismProps> = ({
 
     let onPointerMove = null;
     if (animationType === 'hover') {
-      onPointerMove = e => {
+      onPointerMove = (e: PointerEvent) => {
         onMove(e);
         startRAF();
       };
@@ -351,7 +351,7 @@ const Prism: React.FC<PrismProps> = ({
       program.uniforms.uUseBaseWobble.value = 1;
     }
 
-    const render = t => {
+    const render = (t: number) => {
       const time = (t - t0) * 0.001;
       program.uniforms.iTime.value = time;
 
