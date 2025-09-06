@@ -38,7 +38,7 @@ const Prism: React.FC<PrismProps> = ({
   suspendWhenOffscreen = false,
   timeScale = 0.5
 }) => {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -74,7 +74,7 @@ const Prism: React.FC<PrismProps> = ({
     gl.disable(gl.CULL_FACE);
     gl.disable(gl.BLEND);
 
-    if (gl.canvas instanceof HTMLCanvasElement) {
+    if (gl.canvas instanceof HTMLCanvasElement && container instanceof HTMLElement) {
       Object.assign(gl.canvas.style, {
         position: 'absolute',
         inset: '0',
