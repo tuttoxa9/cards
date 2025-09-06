@@ -428,7 +428,7 @@ const Prism: React.FC<PrismProps> = ({
       if (suspendWhenOffscreen) {
         const io = (container as HTMLDivElement & { __prismIO?: IntersectionObserver }).__prismIO;
         if (io) io.disconnect();
-        delete container.__prismIO;
+        delete (container as HTMLDivElement & { __prismIO?: IntersectionObserver }).__prismIO;
       }
       if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
     };
