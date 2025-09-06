@@ -74,14 +74,16 @@ const Prism: React.FC<PrismProps> = ({
     gl.disable(gl.CULL_FACE);
     gl.disable(gl.BLEND);
 
-    Object.assign(gl.canvas.style, {
-      position: 'absolute',
-      inset: '0',
-      width: '100%',
-      height: '100%',
-      display: 'block'
-    });
-    container.appendChild(gl.canvas);
+    if (gl.canvas instanceof HTMLCanvasElement) {
+      Object.assign(gl.canvas.style, {
+        position: 'absolute',
+        inset: '0',
+        width: '100%',
+        height: '100%',
+        display: 'block'
+      });
+      container.appendChild(gl.canvas);
+    }
 
     const vertex = /* glsl */ `
       attribute vec2 position;
