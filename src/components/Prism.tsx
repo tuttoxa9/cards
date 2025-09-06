@@ -412,7 +412,7 @@ const Prism: React.FC<PrismProps> = ({
       });
       io.observe(container);
       startRAF();
-      (container as any).__prismIO = io;
+      (container as HTMLDivElement & { __prismIO?: IntersectionObserver }).__prismIO = io;
     } else {
       startRAF();
     }
@@ -426,7 +426,7 @@ const Prism: React.FC<PrismProps> = ({
         window.removeEventListener('blur', onBlur);
       }
       if (suspendWhenOffscreen) {
-        const io = (container as any).__prismIO;
+        const io = (container as HTMLDivElement & { __prismIO?: IntersectionObserver }).__prismIO;
         if (io) io.disconnect();
         delete container.__prismIO;
       }
