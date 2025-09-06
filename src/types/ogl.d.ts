@@ -7,7 +7,7 @@ declare module 'ogl' {
       antialias?: boolean;
     });
     setSize(width: number, height: number): void;
-    render(options: { scene: any }): void;
+    render(options: { scene: unknown }): void;
   }
 
   export class Triangle {
@@ -15,18 +15,18 @@ declare module 'ogl' {
   }
 
   export class Program {
-    uniforms: Record<string, { value: any }>;
+    uniforms: Record<string, { value: unknown }>;
     constructor(gl: WebGLRenderingContext, options: {
       vertex: string;
       fragment: string;
-      uniforms?: Record<string, { value: any }>;
+      uniforms?: Record<string, { value: unknown }>;
     });
   }
 
   export class Mesh {
     constructor(gl: WebGLRenderingContext, options: {
-      geometry: any;
-      program: any;
+      geometry: unknown;
+      program: unknown;
     });
   }
 }
