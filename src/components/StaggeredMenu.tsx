@@ -1,7 +1,37 @@
+'use client';
+
 import React, { useCallback, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-export const StaggeredMenu = ({
+interface MenuItem {
+  label: string;
+  link: string;
+  ariaLabel?: string;
+}
+
+interface SocialItem {
+  label: string;
+  link: string;
+}
+
+interface StaggeredMenuProps {
+  position?: 'left' | 'right';
+  colors?: string[];
+  items?: MenuItem[];
+  socialItems?: SocialItem[];
+  displaySocials?: boolean;
+  displayItemNumbering?: boolean;
+  className?: string;
+  logoUrl?: string;
+  menuButtonColor?: string;
+  openMenuButtonColor?: string;
+  changeMenuColorOnOpen?: boolean;
+  accentColor?: string;
+  onMenuOpen?: () => void;
+  onMenuClose?: () => void;
+}
+
+export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   position = 'right',
   colors = ['#B19EEF', '#5227FF'],
   items = [],
@@ -44,6 +74,8 @@ export const StaggeredMenu = ({
   const itemEntranceTweenRef = useRef(null);
 
   useLayoutEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const ctx = gsap.context(() => {
       const panel = panelRef.current;
       const preContainer = preLayersRef.current;

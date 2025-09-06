@@ -1,7 +1,27 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import { Renderer, Triangle, Program, Mesh } from 'ogl';
 
-const Prism = ({
+interface PrismProps {
+  height?: number;
+  baseWidth?: number;
+  animationType?: 'rotate' | 'hover' | '3drotate';
+  glow?: number;
+  offset?: { x: number; y: number };
+  noise?: number;
+  transparent?: boolean;
+  scale?: number;
+  hueShift?: number;
+  colorFrequency?: number;
+  hoverStrength?: number;
+  inertia?: number;
+  bloom?: number;
+  suspendWhenOffscreen?: boolean;
+  timeScale?: number;
+}
+
+const Prism: React.FC<PrismProps> = ({
   height = 3.5,
   baseWidth = 5.5,
   animationType = 'rotate',
@@ -22,7 +42,7 @@ const Prism = ({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || typeof window === 'undefined') return;
 
     const H = Math.max(0.001, height);
     const BW = Math.max(0.001, baseWidth);
