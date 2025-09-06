@@ -4,8 +4,17 @@ import { useState } from 'react';
 import Prism from '@/components/Prism';
 import StaggeredMenu from '@/components/StaggeredMenu';
 
+interface Card {
+  id: number;
+  name: string;
+  price: string;
+  image: string;
+  rarity: string;
+  description: string;
+}
+
 export default function Home() {
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCard, setSelectedCard] = useState<Card | null>(null);
 
   const menuItems = [
     { label: 'Главная', link: '#home', ariaLabel: 'Перейти на главную' },
@@ -55,7 +64,7 @@ export default function Home() {
     }
   ];
 
-  const openModal = (card) => {
+  const openModal = (card: Card) => {
     setSelectedCard(card);
   };
 
