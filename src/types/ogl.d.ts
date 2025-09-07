@@ -1,6 +1,6 @@
 declare module 'ogl' {
   export class Renderer {
-    gl: WebGLRenderingContext;
+    gl: WebGLRenderingContext & { canvas: HTMLCanvasElement | OffscreenCanvas };
     constructor(options?: {
       dpr?: number;
       alpha?: boolean;

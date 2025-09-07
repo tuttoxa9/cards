@@ -430,7 +430,7 @@ const Prism: React.FC<PrismProps> = ({
         if (io) io.disconnect();
         delete (container as HTMLDivElement & { __prismIO?: IntersectionObserver }).__prismIO;
       }
-      if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
+      if (gl.canvas instanceof HTMLCanvasElement && gl.canvas.parentElement === container) container.removeChild(gl.canvas);
     };
   }, [
     height,
