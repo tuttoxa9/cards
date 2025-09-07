@@ -87,7 +87,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
 
       if (!panel || !plusH || !plusV || !icon || !textInner) return;
 
-      let preLayers = [];
+      let preLayers: Element[] = [];
       if (preContainer) {
         preLayers = Array.from(preContainer.querySelectorAll('.sm-prelayer'));
       }
