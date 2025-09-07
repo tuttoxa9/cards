@@ -76,7 +76,7 @@ export default function Home() {
     <div className="min-h-screen relative bg-white overflow-hidden">
       {/* Фон с PrismaticBurst эффектом */}
       <div className="fixed inset-0 z-0">
-        <PrismaticBurst />
+        <PrismaticBurst colors={[]} rayCount={0} />
       </div>
 
       {/* Меню */}
