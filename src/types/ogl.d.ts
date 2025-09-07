@@ -29,4 +29,27 @@ declare module 'ogl' {
       program: unknown;
     });
   }
+
+  export class Texture {
+    constructor(gl: WebGLRenderingContext, options?: {
+      image?: Uint8Array | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
+      width?: number;
+      height?: number;
+      generateMipmaps?: boolean;
+      flipY?: boolean;
+      format?: number;
+      type?: number;
+    });
+    minFilter: number;
+    magFilter: number;
+    wrapS: number;
+    wrapT: number;
+    image: Uint8Array | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement;
+    width: number;
+    height: number;
+    format: number;
+    type: number;
+    needsUpdate: boolean;
+    texture: WebGLTexture;
+  }
 }
