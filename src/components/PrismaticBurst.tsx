@@ -174,7 +174,7 @@ void main(){
     fragColor = vec4(clamp(col, 0.0, 1.0), 1.0);
 }`;
 
-const hexToRgb01 = hex => {
+const hexToRgb01 = (hex: string) => {
   let h = hex.trim();
   if (h.startsWith('#')) h = h.slice(1);
   if (h.length === 3) {
@@ -191,13 +191,26 @@ const hexToRgb01 = hex => {
   return [r, g, b];
 };
 
-const toPx = v => {
+const toPx = (v: string | number | null | undefined) => {
   if (v == null) return 0;
   if (typeof v === 'number') return v;
   const s = String(v).trim();
   const num = parseFloat(s.replace('px', ''));
   return isNaN(num) ? 0 : num;
 };
+
+interface PrismaticBurstProps {
+  intensity?: number;
+  speed?: number;
+  animationType?: 'rotate' | 'rotate3d' | 'hover';
+  colors: string[];
+  distort?: number;
+  paused?: boolean;
+  offset?: { x: number | string; y: number | string };
+  hoverDampness?: number;
+  rayCount: number;
+  mixBlendMode?: 'lighten' | 'screen' | 'overlay' | 'color-dodge' | 'none';
+}
 
 const PrismaticBurst = ({
   intensity = 2,
@@ -210,7 +223,7 @@ const PrismaticBurst = ({
   hoverDampness = 0,
   rayCount,
   mixBlendMode = 'lighten'
-}) => {
+}: PrismaticBurstProps) => {
   const containerRef = useRef(null);
   const programRef = useRef(null);
   const rendererRef = useRef(null);
@@ -304,7 +317,7 @@ const PrismaticBurst = ({
     }
     resize();
 
-    const onPointer = e => {
+    const onPointer = (e: PointerEvent) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / Math.max(rect.width, 1);
       const y = (e.clientY - rect.top) / Math.max(rect.height, 1);
@@ -315,7 +328,7 @@ const PrismaticBurst = ({
     let io = null;
     if ('IntersectionObserver' in window) {
       io = new IntersectionObserver(
-        entries => {
+        (entries: IntersectionObserverEntry[]) => {
           if (entries[0]) isVisibleRef.current = entries[0].isIntersecting;
         },
         { root: null, threshold: 0.01 }
@@ -329,7 +342,7 @@ const PrismaticBurst = ({
     let last = performance.now();
     let accumTime = 0;
 
-    const update = now => {
+    const update = (now: number) => {
       const dt = Math.max(0, now - last) * 0.001;
       last = now;
       const visible = isVisibleRef.current && !document.hidden;
