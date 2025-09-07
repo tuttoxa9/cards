@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Prism from '@/components/Prism';
+import PrismaticBurst from '@/components/PrismaticBurst';
 import StaggeredMenu from '@/components/StaggeredMenu';
 
 interface Card {
@@ -74,16 +74,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen relative bg-white overflow-hidden">
-      {/* Фон с Prism эффектом */}
+      {/* Фон с PrismaticBurst эффектом */}
       <div className="fixed inset-0 z-0">
-        <Prism
-          animationType="rotate"
-          transparent={true}
-          glow={1.2}
-          colorFrequency={0.8}
-          hueShift={0.3}
-          timeScale={0.3}
-        />
+        <PrismaticBurst />
       </div>
 
       {/* Меню */}
